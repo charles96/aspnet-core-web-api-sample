@@ -9,15 +9,13 @@
 * restful api maturity model 적용
 ## sample detail
 ### endpoints
-|endpoint|method|http status code|description|
+|feature|endpoint|method|http status code|description|
 |---|---|---|---|
-|/v1/user|POST|201 or 400|유저 추가|
-|/v1/user|PUT|200|유저 수정|
-|/v1/user/\{userid}|GET|200|유저 조회|
-|/v1/user/\{userid}|DELETE|204|유저 삭제|
+|유저 추가|/v1/user|POST|201 or 400|201 → location header로 조회 정보 전달|
+|유저 수정|/v1/user|PUT|200||
+|유저 조회|/v1/user/\{userid}|GET|200||
+|유저 삭제|/v1/user/\{userid}|DELETE|204||
 
-* /v1/user
-  * 201 → location header로 조회 정보 전달
 ### model annotations
 * Required
 * Min / MaxLength
