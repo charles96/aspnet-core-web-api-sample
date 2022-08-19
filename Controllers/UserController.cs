@@ -1,5 +1,4 @@
-﻿using System;
-using aspnet_core_web_api_sample.Models;
+﻿using aspnet_core_web_api_sample.Models;
 using Microsoft.AspNetCore.Mvc;
 
 namespace aspnet_core_web_api_sample.Controllers
@@ -29,7 +28,23 @@ namespace aspnet_core_web_api_sample.Controllers
         public async Task<IActionResult> CreateAsync(
             [FromBody] User user)
         {
-            return Created(Url.RouteUrl(1), user);
+            _logger.LogTrace("create");
+            _logger.LogDebug("create");
+            _logger.LogInformation("create");
+            _logger.LogWarning("create");
+            _logger.LogError("create");
+            _logger.LogCritical("create");
+
+            if (!ModelState.IsValid)
+            {
+                return BadRequest(ModelState);
+            }
+
+            return Created(Url.RouteUrl(1), new UserResponse 
+            { 
+                Success = true,
+                User = user
+            });
         }
 
         /// <summary>
@@ -38,7 +53,8 @@ namespace aspnet_core_web_api_sample.Controllers
         /// <param name="userId">유저 아이디</param>
         /// <returns></returns>
         [HttpGet("{userId}")]
-        public async Task<IActionResult> GetAsync(string userId)
+        public async Task<IActionResult> GetAsync(
+            string userId)
         {
             if (userId.Trim() == "hong")
             {
@@ -69,8 +85,9 @@ namespace aspnet_core_web_api_sample.Controllers
         /// </summary>
         /// <param name="user">수정 할 유저 정보</param>
         /// <returns></returns>
-        [HttpPut()]
+        [HttpPut("{userId}")]
         public async Task<IActionResult> UpdateAsync(
+            string userId,
             [FromBody] User user)
         {
             return Ok(new UserResponse() { 
@@ -86,7 +103,8 @@ namespace aspnet_core_web_api_sample.Controllers
         /// <param name="userId">유저 아이디</param>
         /// <returns></returns>
         [HttpDelete("{userId}")]
-        public async Task<IActionResult> DeleteAsync(string userId)
+        public async Task<IActionResult> DeleteAsync(
+            string userId)
         {
             return NoContent();
         }

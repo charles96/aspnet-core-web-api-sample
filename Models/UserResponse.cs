@@ -20,6 +20,10 @@ namespace aspnet_core_web_api_sample.Models
         [JsonPropertyName("message")]
         public string Message { get; set; }
 
+        [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
+        [JsonPropertyName("invalidList")]
+        public string[]? InvalidList { get; set; }
+
         /// <summary>
         /// 유저 정보
         /// </summary>

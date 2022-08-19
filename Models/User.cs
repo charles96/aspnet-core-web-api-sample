@@ -28,7 +28,7 @@ namespace aspnet_core_web_api_sample.Models
         /// 유저 나이
         /// </summary>
         [Required(ErrorMessage = "age 필수 값 누락")]
-        [Range(1,100, ErrorMessage = "age는 1~100세 사이만 입력됩니다")]
+        [Range(1, 120, ErrorMessage = "1 ~ 100 사이의 숫자로 입력")]
         [JsonPropertyName("age")]
         public int Age { get; set; }
 
@@ -37,7 +37,7 @@ namespace aspnet_core_web_api_sample.Models
         /// </summary>
         [Required(ErrorMessage = "birthday 필수 값 누락 (yyyy-MM-dd)")]
         [JsonPropertyName("birthDay")]
-        public DateOnly BirthDay { get; set; }
+        public DateOnly? BirthDay { get; set; }
 
         /// <summary>
         /// 유저 소개
@@ -47,5 +47,9 @@ namespace aspnet_core_web_api_sample.Models
         [MaxLength(10, ErrorMessage = "bio 최대 100자")]
         [JsonPropertyName("bio")]
         public string? Bio { get; set; }
+
+        [Required(ErrorMessage = "job 필수 값 누락")]
+        [JsonPropertyName("job")]
+        public JobType? Job { get; set; }
     }
 }
