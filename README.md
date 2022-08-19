@@ -27,4 +27,16 @@ restful api maturity model 적용
 * .net6 미지원 DateOnly 직렬화 적용
   * DateOnly → yyyy-MM-dd
   * swagger sample에도 반영 됨
+### logging
+[datetime] [log level] [server name] [class name] [method name] [trace id] : message 
+```console
+[2022-08-19 19:06:31.7418] [Debug] [CHARLES-NOTEBOO] [User] [Create] [0HMK1P9RSS8BP:00000009] : create 
+[2022-08-19 19:06:31.7911] [Info] [CHARLES-NOTEBOO] [User] [Create] [0HMK1P9RSS8BP:00000009] : create 
+[2022-08-19 19:06:31.7911] [Warn] [CHARLES-NOTEBOO] [User] [Create] [0HMK1P9RSS8BP:00000009] : create 
+[2022-08-19 19:06:31.7911] [Fatal] [CHARLES-NOTEBOO] [User] [Create] [0HMK1P9RSS8BP:00000009] : create 
+[2022-08-19 19:06:51.3471] [Debug] [CHARLES-NOTEBOO] [User] [Create] [0HMK1P9RSS8BQ:00000001] : create 
+[2022-08-19 19:06:51.3471] [Info] [CHARLES-NOTEBOO] [User] [Create] [0HMK1P9RSS8BQ:00000001] : create 
+[2022-08-19 19:06:51.3471] [Warn] [CHARLES-NOTEBOO] [User] [Create] [0HMK1P9RSS8BQ:00000001] : create 
+[2022-08-19 19:06:51.3471] [Fatal] [CHARLES-NOTEBOO] [User] [Create] [0HMK1P9RSS8BQ:00000001] : create
+```
 ## reference

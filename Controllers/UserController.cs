@@ -28,23 +28,24 @@ namespace aspnet_core_web_api_sample.Controllers
         public async Task<IActionResult> CreateAsync(
             [FromBody] User user)
         {
-            _logger.LogTrace("create");
-            _logger.LogDebug("create");
-            _logger.LogInformation("create");
-            _logger.LogWarning("create");
-            _logger.LogError("create");
-            _logger.LogCritical("create");
+            _logger.LogDebug($"create");
 
-            if (!ModelState.IsValid)
+            try
             {
-                return BadRequest(ModelState);
+                if (!ModelState.IsValid) return BadRequest(ModelState);
+               
+                return Created(Url.RouteUrl(1), new UserResponse
+                {
+                    Success = true,
+                    User = user
+                });
             }
+            catch (Exception ex)
+            {
+                _logger.LogError($"create");
 
-            return Created(Url.RouteUrl(1), new UserResponse 
-            { 
-                Success = true,
-                User = user
-            });
+                return BadRequest(ex);
+            }
         }
 
         /// <summary>
