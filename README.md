@@ -3,11 +3,11 @@
 ## overview
 .net6 web api 개발 샘플
 
-## goals
+## sample goals
 * api versioning
 * logging 적용
-## detail
-restful api maturity model 적용
+* restful api maturity model 적용
+## sample detail
 ### endpoints
 |endpoint|method|http status code|description|
 |---|---|---|---|
@@ -40,3 +40,6 @@ restful api maturity model 적용
 [2022-08-19 19:06:51.3471] [Fatal] [CHARLES-NOTEBOO] [User] [Create] [0HMK1P9RSS8BQ:00000001] : create
 ```
 ## reference
+* [NLog with ILogger in .Net 6.0 Web API](https://medium.com/projectwt/nlog-with-ilogger-in-net-6-0-web-api-fb7072d8ac6c)
+* [why ${aspnet-TraceIdentifier} be different from HttpContext.TraceIdentifier
+](https://github.com/NLog/NLog.Web/issues/590)
