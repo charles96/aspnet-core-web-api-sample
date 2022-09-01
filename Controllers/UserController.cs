@@ -1,5 +1,9 @@
-﻿using aspnet_core_web_api_sample.Models;
+﻿using System.Text.Json;
+using aspnet_core_web_api_sample.Models;
+using Microsoft.AspNetCore.Http.Extensions;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
+using NLog.Targets;
 
 namespace aspnet_core_web_api_sample.Controllers
 {
@@ -13,10 +17,12 @@ namespace aspnet_core_web_api_sample.Controllers
     public class UserController : ControllerBase
     {
         readonly ILogger<UserController> _logger;
+        JsonSerializerOptions _jsonSerializerOptions;
 
-        public UserController(IConfiguration configuration, ILogger<UserController> logger)
+        public UserController(IConfiguration configuration, ILogger<UserController> logger, IOptions<JsonOptions> options)
         {
             _logger = logger;
+            _jsonSerializerOptions = options.Value.JsonSerializerOptions;
         }
 
         /// <summary>
@@ -30,6 +36,7 @@ namespace aspnet_core_web_api_sample.Controllers
         {
             _logger.LogDebug($"create");
 
+
             try
             {
                 if (!ModelState.IsValid) return BadRequest(ModelState);
@@ -37,6 +44,7 @@ namespace aspnet_core_web_api_sample.Controllers
                 return Created(Url.RouteUrl(1), new UserResponse
                 {
                     Success = true,
+                    JoinDate = DateTime.Now,
                     User = user
                 });
             }
@@ -57,6 +65,8 @@ namespace aspnet_core_web_api_sample.Controllers
         public async Task<IActionResult> GetAsync(
             string userId)
         {
+            _logger.LogDebug($"param={Request.GetDisplayUrl()}");
+
             if (userId.Trim() == "hong")
             {
                 return Ok(new UserResponse() { 

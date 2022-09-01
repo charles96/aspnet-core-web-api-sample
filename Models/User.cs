@@ -39,6 +39,10 @@ namespace aspnet_core_web_api_sample.Models
         [JsonPropertyName("birthDay")]
         public DateOnly? BirthDay { get; set; }
 
+
+        [JsonPropertyName("TestDate")]
+        public DateTime? TestDate { get; set; }
+
         /// <summary>
         /// 유저 소개
         /// </summary>

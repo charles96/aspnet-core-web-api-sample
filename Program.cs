@@ -21,10 +21,12 @@ try
 
     builder.Services.AddEndpointsApiExplorer();
     builder.Services.AddHttpClient();
+    builder.Services.Configure<RouteOptions>(options => options.LowercaseUrls = true);
     builder.Services.Configure<ApiBehaviorOptions>(options => options.SuppressModelStateInvalidFilter = true);
     builder.Services.AddSwaggerGen(options => {
         options.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, "aspnet-core-web-api-sample.xml"));
         options.MapType<DateOnly>(() => new OpenApiSchema { Type = "string", Example = new OpenApiString("2022-10-31") });
+        options.MapType<DateTime>(() => new OpenApiSchema { Type = "string", Example = new OpenApiString("2022-10-31 23:59:59") });
         options.SwaggerDoc("v1", new OpenApiInfo
         {
             Version = "v1",
@@ -41,6 +43,7 @@ try
     builder.Services.AddControllers() //options => options.Filters.Add<HttpResponseExceptionFilter>()
                     .AddJsonOptions(options =>
                     {
+                        options.JsonSerializerOptions.Converters.Add(new DateTimeJsonConverter());
                         options.JsonSerializerOptions.Converters.Add(new DateOnlyJsonConverter());
                         options.JsonSerializerOptions.Converters.Add(new JsonStringEnumConverter());
                     });

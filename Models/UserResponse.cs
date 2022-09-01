@@ -30,5 +30,8 @@ namespace aspnet_core_web_api_sample.Models
         [JsonIgnore(Condition = JsonIgnoreCondition.WhenWritingNull)]
         [JsonPropertyName("user")]
         public User User { get; set; }
+
+        [JsonPropertyName("joinDate")]
+        public DateTime JoinDate { get; set; }
     }
 }
