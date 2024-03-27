@@ -1,4 +1,5 @@
 using System.Text.Json.Serialization;
+using aspnet_core_web_api_sample;
 using aspnet_core_web_api_sample.Converters;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Versioning;
@@ -30,13 +31,13 @@ try
         options.SwaggerDoc("v1", new OpenApiInfo
         {
             Version = "v1",
-            Title = "네이버 혜택 Template API",
-            Description = "루나 소프트를 통해 발송 될 네이버 혜택 메시지의 Template을 관리하는 API입니다.",
-            TermsOfService = new Uri("https://lunasoft.co.kr/home/main/page/policy/terms"),
+            Title = "API Title",
+            Description = "API Description",
+            TermsOfService = new Uri("https://example.test"),
             Contact = new OpenApiContact
             {
                 Name = "Contact",
-                Url = new Uri("https://lunasoft.co.kr/home/main/page/company/intro")
+                Url = new Uri("https://example.test")
             }
         });
     });
@@ -59,8 +60,6 @@ try
             new MediaTypeApiVersionReader("ver"));
     });
 
-    //builder.Host.ConfigureServices(services => services.AddSingleton<NaverBenefitTemplate>());
-
     var app = builder.Build();
 
     // Configure the HTTP request pipeline.
@@ -70,6 +69,7 @@ try
         app.UseSwaggerUI(o => { o.DocumentTitle = "네이버 혜택 Template API"; });
     }
 
+    app.UseMiddleware<TraceIdMiddleware>();
     app.UseHttpsRedirection();
     app.UseAuthorization();
     app.MapControllers();

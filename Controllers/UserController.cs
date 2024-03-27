@@ -36,7 +36,6 @@ namespace aspnet_core_web_api_sample.Controllers
         {
             _logger.LogDebug($"create");
 
-
             try
             {
                 if (!ModelState.IsValid) return BadRequest(ModelState);
