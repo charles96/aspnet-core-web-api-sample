@@ -5,15 +5,12 @@
         private readonly RequestDelegate _next;
 
         public TraceIdMiddleware(RequestDelegate next)
-        {
-            _next = next;
-        }
+            => _next = next;
 
         public async Task Invoke(HttpContext context)
         {
             context.TraceIdentifier = Guid.NewGuid().ToString();
-            string id = context.TraceIdentifier;
-            context.Response.Headers["X-Trace-Id"] = id;
+            context.Response.Headers["X-Trace-Id"] = context.TraceIdentifier;
             await _next(context);
         }
     }
