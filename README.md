@@ -1,7 +1,7 @@
 # Asp.net Core Web API sample
 
 ## overview
-.net6 web api °³¹ß »ùÇÃ
+.net web api °³¹ß »ùÇÃ
 
 ## sample goals
 * api versioning

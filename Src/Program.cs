@@ -1,3 +1,4 @@
+using System.Reflection;
 using System.Text.Json.Serialization;
 using aspnet_core_web_api_sample;
 using aspnet_core_web_api_sample.Converters;
@@ -25,7 +26,9 @@ try
     builder.Services.Configure<RouteOptions>(options => options.LowercaseUrls = true);
     builder.Services.Configure<ApiBehaviorOptions>(options => options.SuppressModelStateInvalidFilter = true);
     builder.Services.AddSwaggerGen(options => {
-        options.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, "aspnet-core-web-api-sample.xml"));
+
+        var xmlFile = $"{Assembly.GetExecutingAssembly().GetName().Name}.xml";
+        options.IncludeXmlComments(Path.Combine(AppContext.BaseDirectory, xmlFile));
         options.MapType<DateOnly>(() => new OpenApiSchema { Type = "string", Example = new OpenApiString("2022-10-31") });
         options.MapType<DateTime>(() => new OpenApiSchema { Type = "string", Example = new OpenApiString("2022-10-31 23:59:59") });
         options.SwaggerDoc("v1", new OpenApiInfo
@@ -66,7 +69,7 @@ try
     if (app.Environment.IsDevelopment())
     {
         app.UseSwagger(options => { });
-        app.UseSwaggerUI(o => { o.DocumentTitle = "³×ÀÌ¹ö ÇýÅÃ Template API"; });
+        app.UseSwaggerUI(o => { o.DocumentTitle = "Swagger Title"; });
     }
 
     app.UseMiddleware<TraceIdMiddleware>();
