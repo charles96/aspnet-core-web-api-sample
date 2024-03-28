@@ -44,7 +44,7 @@ try
             }
         });
     });
-    builder.Services.AddControllers() //options => options.Filters.Add<HttpResponseExceptionFilter>()
+    builder.Services.AddControllers()
                     .AddJsonOptions(options =>
                     {
                         options.JsonSerializerOptions.Converters.Add(new DateTimeJsonConverter());

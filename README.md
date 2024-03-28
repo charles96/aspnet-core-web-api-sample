@@ -57,3 +57,4 @@ api 실행 주체자와 api개발자간에 x-trace-id 하나를 통해 트랜젝션 추적이 가능하도�
 * [why ${aspnet-TraceIdentifier} be different from HttpContext.TraceIdentifier
 ](https://github.com/NLog/NLog.Web/issues/590)
 * [Use GUID as TraceIdentifier in ASP.NET Core Web API](https://www.codeproject.com/Tips/5337613/Use-GUID-as-TraceIdentifier-in-ASP-NET-Core-Web-AP)
+* [How to modify response headers in ASP.NET Core middleware](https://blog.elmah.io/how-to-modify-response-headers-in-asp-net-core-middleware/)

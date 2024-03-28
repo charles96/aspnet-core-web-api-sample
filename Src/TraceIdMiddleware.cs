@@ -7,10 +7,15 @@
         public TraceIdMiddleware(RequestDelegate next)
             => _next = next;
 
-        public async Task Invoke(HttpContext context)
+        public async Task InvokeAsync(HttpContext context)
         {
             context.TraceIdentifier = Guid.NewGuid().ToString();
-            context.Response.Headers["X-Trace-Id"] = context.TraceIdentifier;
+            context.Response.OnStarting(() =>
+            {
+                context.Response.Headers["X-Trace-Id"] = context.TraceIdentifier;
+                return Task.CompletedTask;
+            });
+
             await _next(context);
         }
     }
