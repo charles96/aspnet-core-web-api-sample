@@ -1,4 +1,5 @@
 ﻿using System.Text.Json;
+using Asp.Versioning;
 using aspnet_core_web_api_sample.Models;
 using Microsoft.AspNetCore.Http.Extensions;
 using Microsoft.AspNetCore.Mvc;
@@ -100,6 +101,8 @@ namespace aspnet_core_web_api_sample.Controllers
             string userId,
             [FromBody] User user)
         {
+            _logger.LogDebug($"param={Request.GetDisplayUrl()}");
+
             return Ok(new UserResponse() { 
                 Success = true,
                 Message = "성공적으로 수정 되었습니다.",
@@ -116,6 +119,17 @@ namespace aspnet_core_web_api_sample.Controllers
         public async Task<IActionResult> DeleteAsync(
             string userId)
         {
+            _logger.LogDebug($"param={Request.GetDisplayUrl()}");
+
+            try
+            {
+                throw new Exception("aaaaa");
+            }
+            catch(Exception ex)
+            {   
+                _logger.LogError($"ex={ex.Message}");
+            }
+
             return NoContent();
         }
     }

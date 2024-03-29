@@ -1,9 +1,9 @@
 using System.Reflection;
 using System.Text.Json.Serialization;
+using Asp.Versioning;
 using aspnet_core_web_api_sample;
 using aspnet_core_web_api_sample.Converters;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Versioning;
 using Microsoft.OpenApi.Any;
 using Microsoft.OpenApi.Models;
 using NLog;
