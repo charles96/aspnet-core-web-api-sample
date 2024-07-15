@@ -4,7 +4,6 @@ using aspnet_core_web_api_sample.Models;
 using Microsoft.AspNetCore.Http.Extensions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
-using NLog.Targets;
 
 namespace aspnet_core_web_api_sample.Controllers
 {
@@ -39,8 +38,13 @@ namespace aspnet_core_web_api_sample.Controllers
 
             try
             {
-                if (!ModelState.IsValid) return BadRequest(ModelState);
-               
+                if (!ModelState.IsValid) //모델에 맞지 않게 파라메터가 넘어왔을 시
+                {
+                    _logger.LogWarning($"create"); 
+
+                    return BadRequest(ModelState);
+                }
+
                 return Created(Url.RouteUrl(1), new UserResponse
                 {
                     Success = true,
