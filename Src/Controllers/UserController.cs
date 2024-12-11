@@ -13,9 +13,10 @@ namespace aspnet_core_web_api_sample.Controllers
     [ApiController]
     [ApiVersion("1.0")]
     [Route("v{version:apiVersion}/[controller]")]
-    [Produces("application/json", "application/xml")]
     public class UserController : ControllerBase
     {
+        const string X_TRACE_ID = "x-trace-id";
+
         readonly ILogger<UserController> _logger;
         JsonSerializerOptions _jsonSerializerOptions;
 
@@ -28,13 +29,15 @@ namespace aspnet_core_web_api_sample.Controllers
         /// <summary>
         /// 유저 추가
         /// </summary>
-        /// <param name="user">유저 정보</param>
+        /// <param name="traceId">x-trace-id</param>
+        /// <param name="user"></param>
         /// <returns></returns>
         [HttpPost]
         public async Task<IActionResult> CreateAsync(
+            [FromHeader(Name=X_TRACE_ID)] string? traceId,
             [FromBody] User user)
         {
-            _logger.LogDebug($"create");
+            _logger.LogTrace($"create");
 
             try
             {
@@ -63,10 +66,12 @@ namespace aspnet_core_web_api_sample.Controllers
         /// <summary>
         /// 유저 조회
         /// </summary>
+        /// <param name="traceId">x-trace-id</param>
         /// <param name="userId">유저 아이디</param>
         /// <returns></returns>
         [HttpGet("{userId}")]
         public async Task<IActionResult> GetAsync(
+            [FromHeader(Name = X_TRACE_ID)] string? traceId,
             string userId)
         {
             _logger.LogDebug($"param={Request.GetDisplayUrl()}");
@@ -98,10 +103,12 @@ namespace aspnet_core_web_api_sample.Controllers
         /// <summary>
         /// 유저 정보 수정
         /// </summary>
+        /// <param name="traceId">x-trace-id</param>
         /// <param name="user">수정 할 유저 정보</param>
         /// <returns></returns>
         [HttpPut("{userId}")]
         public async Task<IActionResult> UpdateAsync(
+            [FromHeader(Name = X_TRACE_ID)] string? traceId,
             string userId,
             [FromBody] User user)
         {
@@ -117,10 +124,12 @@ namespace aspnet_core_web_api_sample.Controllers
         /// <summary>
         /// 유저 탈퇴
         /// </summary>
+        /// <param name="traceId">x-trace-id</param>
         /// <param name="userId">유저 아이디</param>
         /// <returns></returns>
         [HttpDelete("{userId}")]
         public async Task<IActionResult> DeleteAsync(
+            [FromHeader(Name = X_TRACE_ID)] string? traceId,
             string userId)
         {
             _logger.LogDebug($"param={Request.GetDisplayUrl()}");

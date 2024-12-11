@@ -1,0 +1,19 @@
+
+GET https://localhost:7262/v1/user/hong
+x-trace-id: aaaa-bbbb-cccc-dddd
+###
+
+POST https://localhost:7262/v1/user
+x-trace-id: aaaa-bbbb-cccc-dddd
+Content-Type: application/json
+
+{
+  "id": "chalres",
+  "name": "hong",
+  "age": 20,
+  "birthDay": "2022-10-31",
+  "TestDate": "2022-10-31 23:59:59",
+  "bio": "string",
+  "job": "Programmer"
+}
+###

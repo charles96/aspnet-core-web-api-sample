@@ -3,6 +3,7 @@
     public class TraceIdMiddleware
     {
         private readonly RequestDelegate _next;
+        private readonly string xTraceId = "x-trace-id";
 
         public TraceIdMiddleware(RequestDelegate next)
             => _next = next;
@@ -12,7 +13,12 @@
             context.TraceIdentifier = Guid.NewGuid().ToString();
             context.Response.OnStarting(() =>
             {
-                context.Response.Headers["X-Trace-Id"] = context.TraceIdentifier;
+                var traceId = context.Request.Headers[xTraceId];
+
+                if (String.IsNullOrWhiteSpace(traceId)) 
+                    traceId = context.TraceIdentifier;
+
+                context.Response.Headers[xTraceId] = traceId;
                 return Task.CompletedTask;
             });
 
